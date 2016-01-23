@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'download_manager.ui'
 #
-# Created: Sun Jan 10 05:00:00 2016
+# Created: Sat Jan 23 03:36:01 2016
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,14 +30,16 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(_fromUtf8("margin-left:5px;"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.gridLayout = QtGui.QGridLayout(self.centralwidget)
+        self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
         self.tabWidget = QtGui.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(0, 0, 801, 631))
         self.tabWidget.setStyleSheet(_fromUtf8(""))
         self.tabWidget.setObjectName(_fromUtf8("tabWidget"))
         self.tab_2 = QtGui.QWidget()
         self.tab_2.setObjectName(_fromUtf8("tab_2"))
+        self.gridLayout_2 = QtGui.QGridLayout(self.tab_2)
+        self.gridLayout_2.setObjectName(_fromUtf8("gridLayout_2"))
         self.tableWidget = QtGui.QTableWidget(self.tab_2)
-        self.tableWidget.setGeometry(QtCore.QRect(0, 0, 791, 571))
         self.tableWidget.setBaseSize(QtCore.QSize(0, 0))
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
         self.tableWidget.setColumnCount(4)
@@ -50,6 +52,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtGui.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
+        self.gridLayout_2.addWidget(self.tableWidget, 0, 0, 1, 1)
         self.tabWidget.addTab(self.tab_2, _fromUtf8(""))
         self.tab = QtGui.QWidget()
         self.tab.setObjectName(_fromUtf8("tab"))
@@ -205,6 +208,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.verticalLayout_2.addWidget(self.label_4)
         self.tabWidget.addTab(self.tab, _fromUtf8(""))
+        self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 33))
@@ -215,7 +219,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
