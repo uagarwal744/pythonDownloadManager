@@ -30,21 +30,41 @@ class download_manager(QtGui.QMainWindow):
 		self.meta=response.info()
 		urlsize=int(self.meta.getheaders('Content-Length')[0])
 		if 1000<urlsize<1000000:
-			urlsize=str(urlsize/1000.0) + " KB"
+			urlsize=str("%.2f" %(urlsize/1000.0)) + " KB"
 		elif 1000000<urlsize<10**9:
-			urlsize=str(1.0*urlsize/10**6) + " MB"
+			urlsize=str("%.2f" %(1.0*urlsize/10**6)) + " MB"
 		else:
-			urlsize=str(1.0*urlsize/10**9) + " GB"
+			urlsize=str("%.2f" %(1.0*urlsize/10**9)) + " GB"
 		self.dialog.label_15.setText(urlsize)
 		self.dialog.label_7.setText(urlname)
-		f=open(urlname,'wb')
-		f.write(response.read())
-		stop=timeit.default_timer()
-		speed=float(urlsize.split(' ')[0])/(stop-start)
-		speed=str(speed) + " " + urlsize.split(' ')[-1] + "/s"
-		self.dialog.label_13.setText("100 %")
-		self.dialog.label_8.setText(speed)
-		self.dialog.label_9.setText(str(stop-start) + " s")
+		filename = "/home/utsav/Desktop/" + urlname
+		f=open(filename,'wb')
+		
+		file_size_dl = 0
+		block_sz = 8192
+		while True:
+		    buffer = response.read(block_sz)
+		    if not buffer:
+		        break
+
+		    file_size_dl += len(buffer)
+		    f.write(buffer)
+		    stop=timeit.default_timer()
+		    #Speed
+		    speed=file_size_dl/1024/(stop-start)
+		    speed=str("%.2f" %speed) + " KB/s"
+		    self.dialog.label_8.setText(speed)
+		    self.dialog.label_8.repaint()
+		    #Progress
+		    progress=file_size_dl/float(self.meta.getheaders('Content-Length')[0])
+		    progress=str("%.2f" %(progress*100))
+		    self.dialog.label_13.setText(progress+ " %")
+		    self.dialog.label_13.repaint()
+		#speed=float(urlsize.split(' ')[0])/(stop-start)
+		#speed=str(speed) + " " + urlsize.split(' ')[-1] + "/s"
+		#self.dialog.label_13.setText("100 %")
+		#self.dialog.label_8.setText(speed)
+		self.dialog.label_9.setText(str("%.2f" %(stop-start)) + " s")
 
 	def addDownload2(self):
 		start=timeit.default_timer()
